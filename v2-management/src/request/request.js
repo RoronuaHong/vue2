@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Message } from 'element-ui'
 
 const instance = axios.create({
   baseURL: 'http://xue.cnkdl.cn:23683',
@@ -19,7 +20,16 @@ instance.interceptors.request.use(config => {
 
 // 响应拦截器
 instance.interceptors.response.use(res => {
-  return res.data
+  const data = res.data
+
+  if (data.code !== 200) {
+    // 处理失败逻辑
+    Message.error(data.msg || '请求发生错误')
+
+    return Promise.reject(new Error(data.msg || '请求发生错误'))
+  }
+
+  return data
 }, err => {
   console.log(err)
 

@@ -72,14 +72,10 @@ export default {
 
   methods: {
     async getCaptchacode () {
-      const res = await getCaptchaCodeApi()
       try {
-        if (Number(res.code) === 200) {
-          this.captchaSrc = 'data:image/gif;base64,' + res.img
-          localStorage.setItem('edb-captcha-uuid', res.uuid)
-        } else {
-          this.$message.error(res.msg)
-        }
+        const res = await getCaptchaCodeApi()
+        this.captchaSrc = 'data:image/gif;base64,' + res.img
+        localStorage.setItem('edb-captcha-uuid', res.uuid)
       } catch (err) {
         console.log(err)
       }
@@ -94,6 +90,23 @@ export default {
               code: this.ruleForm.captchacode,
               uuid: localStorage.getItem('edb-captcha-uuid')
             })
+
+            if (!res) {
+              this.$message.error('返回数据错误!')
+
+              return
+            }
+
+            // 1. 提示用户登录成功
+            this.$message.success('登录成功!')
+            // 2. 清除uuid
+            localStorage.removeItem('edb-captcha-uuid')
+            // 3. 保存token
+            localStorage.setItem('edb-auth-authorization', res.token)
+            // 4. 获取用户信息
+
+            // 5. 跳转首页
+            this.$router.push('/')
 
             console.log(res)
           } else {

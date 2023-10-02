@@ -4,7 +4,7 @@ import instance from './request'
 const getCaptchaCodeApi = () => instance.get('/prod-api/captchaImage')
 
 // 登录请求
-const loginApi = params => instance.post('/prod-api/login')
+const loginApi = params => instance.post('/prod-api/login', params)
 
 export {
   getCaptchaCodeApi,
