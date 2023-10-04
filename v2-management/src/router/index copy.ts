@@ -13,7 +13,7 @@ const routes = [
     name: 'mainlayout',
     // component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/MainLayout.vue')
     component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/ElMainLayout.vue'),
-    // redirect: '/home',
+    redirect: '/home',
     children: []
   },
   {
