@@ -50,7 +50,10 @@
             @click="toggleShow()"
           ></el-button>
         </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          Main
+          <svg-icon icon-name="GIS" style="margin-right: 10px"></svg-icon>
+        </el-main>
       </el-container>
     </el-container>
   </div>

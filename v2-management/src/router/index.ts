@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
 import store from '@/store'
+import i18n from '@/locales'
 import { getUserRouterApi } from '@/request/api'
 
 Vue.use(VueRouter)
@@ -65,7 +66,37 @@ router.beforeEach(async (to, from, next) => {
     try {
       const res = await getUserRouterApi()
 
-      console.log('数据: ', res)
+      let newMenuData = [{
+        id: '0',
+        title: '首页',
+        path: '/'
+      }]
+
+      const ret = res.data.map(item => {
+        if (item.children) {
+          return {
+            title: i18n.t(item.meta.title),
+            path: item.path,
+            children: item.children.map(cItem => {
+              return {
+                title: i18n.t(cItem.meta.title),
+                path: item.path + '/' + cItem.path
+              }
+            })
+          }
+        } else {
+          return {
+            title: i18n.t(item.meta.title),
+            path: item.path
+          }
+        }
+      })
+
+      newMenuData = [...newMenuData, ...ret]
+
+      store.commit('userMenuData/handleMenuData', newMenuData)
+
+      console.log(newMenuData)
     } catch (err) {
 
     }

@@ -31,6 +31,7 @@
     "@vue/eslint-config-standard": "^6.1.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "babel-plugin-component": "^1.1.1",
+    "compression-webpack-plugin": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
@@ -38,8 +39,11 @@
     "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
+    "svg-sprite-loader": "^6.0.11",
+    "svg4everybody": "^2.1.9",
     "typescript": "~4.5.5",
     "vue-cli-plugin-element": "~1.0.1",
+    "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.14"
   }
 }

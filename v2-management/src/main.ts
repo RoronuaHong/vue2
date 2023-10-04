@@ -7,6 +7,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import i18n from '@/locales'
+import '@/assets/icons'
 
 Vue.config.productionTip = false
 

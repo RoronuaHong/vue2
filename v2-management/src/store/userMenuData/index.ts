@@ -58,5 +58,10 @@ export default {
         ]
       }
     ]
+  },
+  mutations: {
+    handleMenuData (state, payload) {
+      state.menuData = payload
+    }
   }
 }
