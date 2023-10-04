@@ -63,6 +63,9 @@ router.beforeEach(async (to, from, next) => {
 
   // 3.
   if (token && store.state.userMenuData.menuData.length === 0) {
+    if (!getUserRouterApi) {
+      return
+    }
     try {
       const res = await getUserRouterApi()
 

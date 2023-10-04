@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import router from '@/router'
 
 const instance = axios.create({
   baseURL: 'http://xue.cnkdl.cn:23683',
@@ -29,6 +30,13 @@ instance.interceptors.response.use(res => {
   if (data.code !== 200) {
     // 处理失败逻辑
     Message.error(data.msg || '请求发生错误')
+
+    // token过期 | 没有带token
+    if (data.code === 401) {
+      localStorage.removeItem('edb-authorization-token')
+
+      router.push('/login')
+    }
 
     return Promise.reject(new Error(data.msg || '请求发生错误'))
   }
