@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "menu": {
+      "home": "首页",
+      "customerManagement": "客户管理",
+      "customerFiles": "客户档案",
+      "visitRecords": "拜访记录"
+    }
+  }
+}

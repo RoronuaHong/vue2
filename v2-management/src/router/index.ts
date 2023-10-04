@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
+import store from '@/store'
+import { getUserRouterApi } from '@/request/api'
+
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [
+const routes = [
   {
     path: '/',
     name: 'mainlayout',
@@ -31,7 +34,8 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+// 路由守卫：
+router.beforeEach(async (to, from, next) => {
   // 1. 登录页 -> token存在 -> 回首页。
   // 2. 首页 -> token不存在 -> 登录页。
   const token = localStorage.getItem('edb-authorization-token')
@@ -55,6 +59,18 @@ router.beforeEach((to, from, next) => {
   //     next('/login')
   //   }
   // }
+
+  // 3.
+  if (token && store.state.userMenuData.menuData.length === 0) {
+    try {
+      const res = await getUserRouterApi()
+
+      console.log('数据: ', res)
+    } catch (err) {
+
+    }
+  }
+
   next()
 })
 

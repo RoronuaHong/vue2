@@ -8,8 +8,12 @@ const instance = axios.create({
 
 // TODO: 补全axios部分: 1. 请求缓存；2. 职责链模式；3. cancelToken
 // 请求拦截器
-instance.interceptors.request.use(config => {
-  config.headers.Authorization = 'Bearer token'
+instance.interceptors.request.use((config: any) => {
+  const token = !config!.url.endsWith('/login')
+
+  if (token && !config!.url.endsWith('/login') && !config.url.endsWith('/captchaImage')) {
+    config.headers.Authorization = 'Bearer token'
+  }
 
   return config
 }, err => {

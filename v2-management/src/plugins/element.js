@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import {
-  Button, Input, Form, FormItem, Message, Aside,
   Menu, MenuItem, Submenu,
+  Button, Input, Form, FormItem, Message, Aside,
   Container, Main, Header, Footer, MenuItemGroup
 } from 'element-ui'
 

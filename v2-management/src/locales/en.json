@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "menu": {
+      "home": "Home",
+      "customerManagement": "Customer Management",
+      "customerFiles": "Customer Files",
+      "visitRecords": "Visit Records"
+    }
+  }
+}
