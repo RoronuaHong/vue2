@@ -12,7 +12,9 @@ const routes = [
     path: '/',
     name: 'mainlayout',
     // component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/MainLayout.vue')
-    component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/ElMainLayout.vue')
+    component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/ElMainLayout.vue'),
+    redirect: '/home',
+    children: []
   },
   {
     path: '/login',
@@ -99,7 +101,33 @@ router.beforeEach(async (to, from, next) => {
 
       store.commit('userMenuData/handleMenuData', newMenuData)
 
-      console.log(newMenuData)
+      // 生成动态路由数据
+      let newChildrenRouter = [{
+        path: '/',
+        component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/ElMainLayout.vue')
+      }]
+
+      res.data.forEach(item => {
+        const ret = item.children.map(cItem => {
+          return {
+            path: item.path + '/' + cItem.path,
+            component: () => import(`../views//${item.path}/${cItem.name}.vue`)
+          }
+        })
+      })
+
+      newChildrenRouter = [...newChildrenRouter, ...ret]
+
+      // 添加到路由中的children里:
+      // router.addRoute(父路由, 子路由)
+      newChildrenRouter.forEach(item => {
+        router.addRoute('mainlayout', item)
+      })
+
+      // 重走新路。
+      next(to.path)
+
+      return
     } catch (err) {
 
     }
