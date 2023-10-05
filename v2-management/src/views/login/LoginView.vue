@@ -24,7 +24,7 @@
 <script>
 import { getCaptchaCodeApi, loginApi } from '@/request/api'
 import { validateUsername } from '@/utils/validate'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Vue2LoginView',
@@ -76,6 +76,7 @@ export default {
 
   methods: {
     ...mapMutations('userMenuData', ['handleMenuData']),
+    ...mapActions('userInfo', ['asyncHandleUserInfo']),
     async getCaptchacode () {
       try {
         const res = await getCaptchaCodeApi()
@@ -112,6 +113,8 @@ export default {
 
             // 5. 跳转首页
             this.$router.push('/')
+
+            this.asyncHandleUserInfo()
 
             console.log(res)
           } else {

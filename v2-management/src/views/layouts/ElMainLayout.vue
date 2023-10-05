@@ -56,7 +56,7 @@
               <CrumbComponent></CrumbComponent>
             </div>
             <div class="header-fr">
-
+              {{ userInfo.user?.nickName }}
             </div>
           </div>
           <div class="header-bottom">
@@ -92,7 +92,8 @@ export default {
   computed: {
     ...mapState({
       isCollapse: state => state.navCollapse.isCollapse,
-      menuData: state => state.userMenuData.menuData
+      menuData: state => state.userMenuData.menuData,
+      userInfo: state => state.userInfo.userInfo
     })
   },
 

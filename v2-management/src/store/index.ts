@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
 
+import userInfo, { userInfoState } from './userInfo'
 import navCollapse, { navCollapseState } from './navCollapse'
 import userMenuData, { userMenuDataState } from './userMenuData'
 
@@ -9,7 +10,8 @@ Vue.use(Vuex)
 interface RootState {
   // 根状态类型
   navCollapse: navCollapseState,
-  userMenuData: userMenuDataState
+  userMenuData: userMenuDataState,
+  userInfo: userInfoState
 }
 
 const store: StoreOptions<RootState> = {
@@ -18,6 +20,7 @@ const store: StoreOptions<RootState> = {
   mutations: {},
   actions: {},
   modules: {
+    userInfo,
     navCollapse,
     userMenuData
   }
