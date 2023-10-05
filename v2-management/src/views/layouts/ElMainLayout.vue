@@ -55,8 +55,10 @@
             <div class="header-fl">
               <CrumbComponent></CrumbComponent>
             </div>
-            <div class="header-fr">
-              {{ userInfo.user?.nickName }}
+            <div class="header-fr avatar-box">
+              <!-- {{ userInfo.user?.nickName }} -->
+              <img :src="IMG_BASEURL + (userInfo.user?.avatar || '/profile/avatar/2022/10/10/blob_20221010200353A001.jepg')" alt="" width="40">
+              <i class="el-icon-caret-bottom"></i>
             </div>
           </div>
           <div class="header-bottom">
@@ -76,6 +78,8 @@
 import { mapMutations, mapState } from 'vuex'
 import CrumbComponent from '@/components/CrumbComponent'
 
+import { IMG_BASEURL } from '@/utils/baseUrl'
+
 export default {
   name: 'ElMainLayout',
 
@@ -85,7 +89,7 @@ export default {
 
   data () {
     return {
-
+      IMG_BASEURL
     }
   },
 
@@ -174,6 +178,20 @@ export default {
     box-shadow: 0px 3px 3px #eee;
     .header-fl {
       float: left;
+    }
+    .header-fr {
+      width: 60px;
+      float: right;
+    }
+    .avatar-box {
+      padding: 5px 20px 0 0;
+      img {
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      i {
+        cursor: pointer;
+      }
     }
   }
 </style>
