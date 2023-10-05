@@ -24,6 +24,7 @@
 <script>
 import { getCaptchaCodeApi, loginApi } from '@/request/api'
 import { validateUsername } from '@/utils/validate'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Vue2LoginView',
@@ -68,9 +69,13 @@ export default {
 
   created () {
     this.getCaptchacode()
+
+    // 清除menuData的数据
+    this.handleMenuData([])
   },
 
   methods: {
+    ...mapMutations('userMenuData', ['handleMenuData']),
     async getCaptchacode () {
       try {
         const res = await getCaptchaCodeApi()

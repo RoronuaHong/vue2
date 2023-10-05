@@ -108,19 +108,23 @@ router.beforeEach(async (to, from, next) => {
       // 生成动态路由数据
       let newChildrenRouter = [{
         path: '/',
+        meta: { title: ['首页'] },
         component: () => import(/* webpackChunkName: "layout" */ '../views/layouts/ElMainLayout.vue')
       }]
 
       res.data.forEach(item => {
-        const ret = item.children.map(cItem => {
+        const rets = item.children.map(cItem => {
           return {
             path: item.path + '/' + cItem.path,
-            component: () => import(`../views//${item.path}/${cItem.name}.vue`)
+            component: () => import(`../views//${item.path}/${cItem.name}.vue`),
+            meta: {
+              titles: [item.meta.title, cItem.meta.title]
+            }
           }
         })
-      })
 
-      newChildrenRouter = [...newChildrenRouter, ...ret]
+        newChildrenRouter = [...newChildrenRouter, ...rets]
+      })
 
       // 添加到路由中的children里:
       // router.addRoute(父路由, 子路由)

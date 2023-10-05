@@ -39,16 +39,29 @@
       </el-aside>
       <el-container>
         <el-header>
-          <el-button
-            icon="el-icon-s-unfold"
-            v-if="!isCollapse"
-            @click="toggleShow()"
-          ></el-button>
-          <el-button
-            icon="el-icon-s-fold"
-            v-if="isCollapse"
-            @click="toggleShow()"
-          ></el-button>
+          <div class="header-top">
+            <div class="header-fl">
+              <el-button
+                icon="el-icon-s-unfold"
+                v-if="!isCollapse"
+                @click="toggleShow()"
+              ></el-button>
+              <el-button
+                icon="el-icon-s-fold"
+                v-if="isCollapse"
+                @click="toggleShow()"
+              ></el-button>
+            </div>
+            <div class="header-fl">
+              <CrumbComponent></CrumbComponent>
+            </div>
+            <div class="header-fr">
+
+            </div>
+          </div>
+          <div class="header-bottom">
+
+          </div>
         </el-header>
         <el-main>
           Main
@@ -61,9 +74,14 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import CrumbComponent from '@/components/CrumbComponent'
 
 export default {
   name: 'ElMainLayout',
+
+  components: {
+    CrumbComponent
+  },
 
   data () {
     return {
@@ -88,66 +106,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-layout {
-  height: 100vh;
-}
-.el-header,
-.el-footer {
-  margin-left: 0;
-  padding-left: 0;
-  text-align: left;
-  line-height: 60px;
-  .el-button {
-    width: 50px;
-    height: 50px;
-    margin: 0;
-    padding: 10px 12px;
-    box-sizing: border-box;
-    font-size: 20px;
+  .main-layout {
+    height: 100vh;
+  }
+  .el-header,
+  .el-footer {
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+    line-height: 60px;
+    .el-button {
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      font-size: 20px;
+      border: none;
+    }
+  }
+
+  .el-menu {
     border: none;
+    text-align: left;
   }
-}
 
-.el-menu {
-  border: none;
-  text-align: left;
-}
-
-.el-aside {
-  width: 180px !important;
-  background-color: #304156;
-  box-sizing: border-box;
-  transition: all 0.3s;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-  &.isCollapse {
-    width: 64px !important;
+  .el-aside {
+    width: 180px !important;
+    background-color: #304156;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+    &.isCollapse {
+      width: 64px !important;
+    }
   }
-}
 
-.el-main {
-  height: 100vh;
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
+  .el-main {
+    height: 100vh;
+    background-color: #e9eef3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
+  body > .el-container {
+    margin-bottom: 40px;
+  }
 
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
 
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
 
-.isCollapse .el-submenu__title span, ::v-deep .el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
-  display: none;
-}
+  .isCollapse .el-submenu__title span, ::v-deep .el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
+    display: none;
+  }
+  .header-top {
+    height: 50px;
+    box-shadow: 0px 3px 3px #eee;
+    .header-fl {
+      float: left;
+    }
+  }
 </style>

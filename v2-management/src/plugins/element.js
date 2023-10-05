@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import {
-  Menu, MenuItem, Submenu,
+  Menu, MenuItem, Submenu, Breadcrumb, BreadcrumbItem,
   Button, Input, Form, FormItem, Message, Aside,
   Container, Main, Header, Footer, MenuItemGroup
 } from 'element-ui'
@@ -20,3 +20,5 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
 Vue.use(MenuItemGroup)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
